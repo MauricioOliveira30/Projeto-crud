@@ -32,7 +32,7 @@ try {
     }
     if ($_POST) {
         if ($_POST["idproduto"]) {
-            $sql = "UPDATE produtos SET produto=:produto,  preco=:preco, estoque=:estoque WHERE idproduto =:idproduto";
+            $sql = "UPDATE produtos SET produto=:produto,  preco=:preco, estoque=:estoque,estoquemin,estoquemax WHERE idproduto =:idproduto";
             $stmt = $con->prepare($sql);
             $stmt->bindValue(":produto", $_POST["produto"]);
             $stmt->bindValue(":preco", $_POST["preco"]);
@@ -40,11 +40,13 @@ try {
             $stmt->bindValue(":idproduto", $_POST["idproduto"]);
             $stmt->execute();
         } else {
-            $sql = "INSERT INTO produtos(produto,preco,estoque) VALUES (:produto,:preco,:estoque)";
+            $sql = "INSERT INTO produtos(produto,preco,estoque,estoquemin,estoquemax) VALUES (:produto,:preco,:estoque,:estoquemin,:estoquemax)";
             $stmt = $con->prepare($sql);
             $stmt->bindValue(":produto", $_POST["produto"]);
             $stmt->bindValue(":preco", $_POST["preco"]);
             $stmt->bindValue(":estoque", $_POST["estoque"]);
+                $stmt->bindValue(":estoquemin", $_POST["estoquemin"]);
+                $stmt->bindValue(":estoquemax", $_POST["estoquemax"]);
             $stmt->execute();
         }
         header("Location:listarprodutos.php");
@@ -70,6 +72,10 @@ try {
         Produto <input type="text" name="produto" value="<?php echo isset($produto) ? $produto->produto : null ?>"><br>
         Preço <input type="text" name="preco" value="<?php echo isset($produto) ? $produto->preco : null ?>"><br>
         Estoque <input type="text" name="estoque" value="<?php echo isset($produto) ? $produto->estoque : null ?>"><br>
+        Estoque Mínimo <input type="text" name="estoque" value="<?php echo isset($produto) ? $produto->estoquemin : null ?>"><br>
+         Estoque Máximo<input type="text" name="estoque" value="<?php echo isset($produto) ? $produto->estoquemax : null ?>"><br>
+        
+        
         <input type="hidden" name="idproduto" value="<?php echo isset($produto) ? $produto->idproduto : null ?>">
         <input type="submit">
     </form>
