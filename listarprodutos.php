@@ -36,6 +36,8 @@ try {
                 <th>Produto</th>
                 <th>Preço</th>
                 <th>Estoque</th>
+                 <th>EstoqueMin</th>
+                 <th>EstoqueMax</th>
                 <th colspan=2>Ações</th>
 
             </tr>
@@ -47,6 +49,8 @@ try {
                     <td><?php echo $produto->produto ?></td>
                     <td><?php echo $produto->preco ?></td>
                     <td><?php echo $produto->estoque ?></td>
+                    <td><?php echo $produto->estoquemin ?></td>
+                    <td><?php echo $produto->estoquemax ?></td>
                     <td><a href="frmprodutos.php?idproduto=<?php echo $produto->idproduto ?>">Editar</a></td>
                     <td><a href="frmprodutos.php?op=del&idproduto=<?php echo  $produto->idproduto ?>">Excluir</a></td>
 
